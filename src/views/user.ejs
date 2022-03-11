@@ -41,7 +41,7 @@
   <h1 class="mt-3">Table user:</h1>
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">ID</th>
       <th scope="col">Email</th>
       <th scope="col">User name</th>
       <th scope="col">Action</th>
@@ -50,12 +50,15 @@
   <tbody>
         <% userList.forEach(function(item,index){ %>
         <tr>
-          <th scope="row"><%= index + 1 %></th>
+          <th scope="row"><%= item.id  %></th>
           <td><%= item.email %></td>
           <td><%= item.username %></td>
           <td>
             <button class="btn btn-warning mx-2">Edit</button>
-            <button class="btn btn-danger">Delete</button>
+            <form action="/delete-user/<%= item.id %>" method="POST"
+              style="display:inline">
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
           </td>
         </tr>
 
