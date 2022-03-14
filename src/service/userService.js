@@ -40,6 +40,7 @@ const getUserList = async () => {
   });
   try {
     const [rows, fields] = await connection.execute("select * from users");
+    console.log(rows);
     return rows;
   } catch (error) {
     console.log(error);
