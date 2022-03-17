@@ -1,5 +1,5 @@
 import mysql from "mysql2/promise";
-import bluebird from "bluebird";
+// import bluebird from "bluebird";
 import bcrypt from "bcryptjs/dist/bcrypt";
 import db from "../models/index";
 const saltRounds = 10;
@@ -9,7 +9,6 @@ const hashUserPassword = (password) => {
   let hashPassword = bcrypt.hashSync(password, salt);
   return hashPassword;
 };
-
 const createNewUser = async (email, password, username) => {
   let hashPass = hashUserPassword(password);
   try {
@@ -25,8 +24,12 @@ const createNewUser = async (email, password, username) => {
 
 const getUserList = async () => {
   let users = [];
-  users = await db.User.findAll();
-  return users;
+  try {
+    users = await db.User.findAll();
+    return users;
+  } catch (error) {
+    console.log(error);
+  }
 };
 const deleteUser = async (userId) => {
   await db.User.destroy({
